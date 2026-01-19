@@ -1,134 +1,127 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Cache-Control" content="no-transform">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
     <title>轻佻 - 有趣的涂鸦</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="有趣的涂鸦~">
     <meta name="keywords" content="涂鸦|墙面涂鸦|有趣的涂鸦">
     <link rel="shortcut icon" href="../dm/img/lsj-logo.svg">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../dm/lsj.css">
-
     <style>
-/* 【随机图-圆角框】 */
-#coverContainer {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.002), 0 6px 12px 0 rgba(0, 0, 0, 0.09);
-    text-align: center;
-    border-radius: 20px;
-    /* 添加圆角 */
-    overflow: hidden;
-    /* 确保圆角应用于内容 */
-    width: 90%;
-    /* 容器宽度 */
-    max-width: 600px;
-    /* 最大宽度 */
-    margin: 0 auto;
-    /* 居中对齐 */
-}
+        * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Lato', sans-serif;}
+        body {background-color: #f5f5f7;min-height: 100vh;padding-top: 60px;}
 
-/* 【随机图-尺寸】 */
-#coverPic {
-    display: block;
-    width: 100%;
-    height: auto;
-    /* 保持宽高比 */
-    max-height: 400px;
-    /* 最大高度 */
-    object-fit: cover;
-    /* 保持图片内容的完整性 */
-}
+        /* 顶部导航栏样式 */
+        .w3-top {position: fixed;top: 0;left: 0;width: 100%;z-index: 999;}
+        .nav-bar {background-color: #000;display: flex;align-items: center;justify-content: space-between;padding: 0 20px;height: 60px;box-shadow: 0 2px 10px rgba(0,0,0,0.1);}
+        .nav-logo {color: #fff;text-decoration: none;font-size: 18px;font-weight: 600;}
+        .nav-menu {display: flex;gap: 20px;}
+        .nav-link {color: #fff;text-decoration: none;padding: 8px 16px;border-radius: 20px;transition: background-color 0.3s;}
+        .nav-link:hover {background-color: #333;}
+        .menu-toggle {display: none;color: #fff;font-size: 20px;cursor: pointer;}
+        .mobile-menu {display: none;background-color: #000;padding: 15px 20px;box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+        .mobile-menu .nav-link {display: block;margin: 10px 0;}
 
-/* 【随机图-文案框】 */
-#coverTxt2 {
-    margin-top: 12px;
-    /* 文案上距 */
-    padding-bottom: 12px;
-    /* 文案下距 */
-}
+        /* 主容器 水平垂直居中 */
+        .main-container {display: flex;flex-direction: column;justify-content: center;align-items: center;min-height: calc(100vh - 60px);padding: 20px;width: 100%;box-sizing: border-box;}
 
-/* 【随机图-居中】 */
-.w3-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;
-    /* 全屏高度 */
-}
+        /* 图片卡片 悬浮上移动效 */
+        .image-card {background-color: #fff;border-radius: 24px;box-shadow: 0 8px 24px rgba(0,0,0,0.06);width: 100%;max-width: 650px;overflow: hidden;transition: transform 0.3s;}
+        .image-card:hover {transform: translateY(-5px);}
+        
+        /* 图片容器及样式 悬浮放大 */
+        .image-wrapper {width: 100%;}
+        #coverPic {width: 100%;height: auto;object-fit: contain;transition: transform 0.5s;}
+        .image-card:hover #coverPic {transform: scale(1.03);}
+
+        /* 文本区域样式 */
+        .text-wrapper {padding: 20px 24px;text-align: center;}
+        #coverTxt2 {color: #333;font-size: 18px;line-height: 1.5;}
+        
+        /* 按钮区域及样式 悬浮上移动效 */
+        .btn-wrapper {padding: 0 24px 24px;display: flex;justify-content: center;gap: 12px;flex-wrap: wrap;}
+        .btn {padding: 10px 24px;background-color: #000;color: #fff;border: none;border-radius: 24px;font-size: 16px;cursor: pointer;transition: all 0.3s;}
+        .btn:hover {background-color: #333;transform: translateY(-2px);}
+
+        /* 响应式适配-平板/手机端 */
+        @media (max-width: 768px) {
+            .nav-menu {display: none;}
+            .menu-toggle {display: block;}
+            .main-container {padding: 8px 6px !important;}
+            .image-card {max-width: 95% !important;}
+            #coverTxt2 {font-size: 16px;}
+            .btn {padding: 8px 20px;font-size: 15px;}
+        }
+        @media (max-width: 480px) {
+            .text-wrapper {padding: 12px 16px;}
+            .btn-wrapper {padding: 0 16px 16px;}
+        }
     </style>
-
 </head>
-
-
-
 <body>
-    <!-- 【导航栏】 -->
+    <!-- 顶部导航栏 -->
     <div class="w3-top">
-        <div class="w3-bar w3-black w3-card">
-            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-            <a href="index.html" class="w3-bar-item w3-button w3-padding-large">有趣的涂鸦</a>
-            <a href="./sm/wx-jz.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small" target="_self">捐赠</a>
-            <a href="https://music.163.com/#/user/home?id=1950895176" class="w3-bar-item w3-button w3-padding-large w3-hide-small" target="_self">投稿</a>
+        <div class="nav-bar">
+            <a href="index.html" class="nav-logo">有趣的涂鸦</a>
+            <div class="nav-menu">
+                <a href="./sm/wx-jz.html" class="nav-link" target="_self">捐赠</a>
+                <a href="javascript:tgBtn()" class="nav-link">投稿</a>
+            </div>
+            <div class="menu-toggle" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+        <div id="navDemo" class="mobile-menu">
+            <a href="./sm/wx-jz.html" class="nav-link" onclick="myFunction()">捐赠</a>
+            <a href="javascript:tgBtn()" class="nav-link" onclick="myFunction()">投稿</a>
         </div>
     </div>
-    <!-- 【小屏菜单（如果您希望在单击链接时导航栏始终显示在内容顶部，请删除 onclick 属性）】 -->
-    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-        <a href="./sm/wx-jz.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">捐赠</a>
-        <a href="https://music.163.com/#/user/home?id=1950895176" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">投稿</a>
-    </div>
 
-
-
-    <!-- 【页面内容】 -->
-<div class="w3-content" style="max-width:800px;margin-top:56px">
-    <div class="w3-display-container w3-center">
-        <div id="coverContainer">
-            <img id="coverPic" onClick="window.location.reload();" alt="图片" />
-            <div id="coverTxt2"></div>
+    <!-- 主内容区 -->
+    <div class="main-container">
+        <div class="image-card">
+            <div class="image-wrapper">
+                <img id="coverPic" alt="图片" />
+            </div>
+            <div class="text-wrapper">
+                <div id="coverTxt2"></div>
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn" onclick="downloadImage()">下载图片</button>
+                <button class="btn" onclick="chooseCover()">随机涂鸦</button>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="json.js"></script>
-    <!-- 【页面内容】 -->
-
-
-
-<script> 
-
-//【显示带有文本的随机图片】
-window.onload=chooseCover;
-function chooseCover() {
-    // 获取所有键的数组
-    var keys=Object.keys(jsonData);
-    // 随机选择一个键
-    var randomKey=keys[Math.floor(Math.random() * keys.length)];
-    // 获取对应的值
-    var randomValue=jsonData[randomKey];
-    document.getElementById("coverPic").src=randomKey;
-    document.getElementById("coverTxt2").innerHTML=randomValue;
-}
-
-//【小屏菜单按钮单击切换】
-function myFunction() {
-    var x=document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show")==-1) {
-        x.className+=" w3-show";
-    }
-    else {
-        x.className=x.className.replace(" w3-show", "");
-    }
-}
-
-</script>
-
+    <script src="json.js"></script>
+    <script>
+        window.onload = chooseCover;
+        // 随机加载图片和文本
+        function chooseCover() {
+            var keys = Object.keys(jsonData);
+            var randomKey = keys[Math.floor(Math.random() * keys.length)];
+            document.getElementById("coverPic").src = randomKey;
+            document.getElementById("coverTxt2").innerHTML = jsonData[randomKey];
+        }
+        // 下载图片-新开标签页
+        function downloadImage() {
+            const img = document.getElementById("coverPic");
+            if (!img.src || img.src === window.location.href) return alert("暂无可下载的图片！");
+            window.open(img.src, '_blank');
+        }
+        // 移动端菜单切换
+        function myFunction() {
+            const x = document.getElementById("navDemo");
+            x.style.display = x.style.display === "block" ? "none" : "block";
+        }
+        // 投稿按钮：弹窗提示 + 跳转网页
+        function tgBtn(){
+            alert("请私信推歌君投稿");
+            window.location.href = "https://music.163.com/#/user/home?id=1950895176";
+        }
+    </script>
 </body>
 </html>
